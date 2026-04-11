@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\controllers\\professorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\controllers\\professorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\controllers\\administratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\controllers\\administratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,24 +19,24 @@
       "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\controllers\\commoncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\models\\lmsmodels\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\models\\lmsmodels\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\models\\lmsmodels\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\models\\lmsmodels\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\models\\lmsmodels\\enrolled.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\models\\lmsmodels\\enrolled.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\models\\lmsmodels\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\models\\lmsmodels\\lmscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\models\\lmsmodels\\professor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\models\\lmsmodels\\professor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|c:\\users\\adamw\\onedrive\\desktop\\lms\\team98lms\\lmshandout (1)\\lms\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F7779DCA-6458-4556-ABC4-E8D6A159851E}|LMS\\LMS.csproj|solutionrelative:lms\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,30 +46,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CommonController.cs",
-              "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\CommonController.cs",
-              "RelativeDocumentMoniker": "LMS\\Controllers\\CommonController.cs",
-              "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\CommonController.cs",
-              "RelativeToolTip": "LMS\\Controllers\\CommonController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Enrolled.cs",
+              "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Models\\LMSModels\\Enrolled.cs",
+              "RelativeDocumentMoniker": "LMS\\Models\\LMSModels\\Enrolled.cs",
+              "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Models\\LMSModels\\Enrolled.cs",
+              "RelativeToolTip": "LMS\\Models\\LMSModels\\Enrolled.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-06T23:39:24.42Z",
+              "WhenOpened": "2026-04-10T22:32:07.37Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "LMS\\Controllers\\StudentController.cs",
+              "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "LMS\\Controllers\\StudentController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T21:19:42.68Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProfessorController.cs",
+              "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\ProfessorController.cs",
+              "RelativeDocumentMoniker": "LMS\\Controllers\\ProfessorController.cs",
+              "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\ProfessorController.cs",
+              "RelativeToolTip": "LMS\\Controllers\\ProfessorController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAI4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T21:19:41.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "LMSContext.cs",
               "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Models\\LMSModels\\LMSContext.cs",
               "RelativeDocumentMoniker": "LMS\\Models\\LMSModels\\LMSContext.cs",
               "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Models\\LMSModels\\LMSContext.cs",
               "RelativeToolTip": "LMS\\Models\\LMSModels\\LMSContext.cs",
-              "ViewState": "AgIAADIBAAAAAAAAAAAAwEIBAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAxwCMAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-06T23:29:02.618Z",
               "EditorCaption": ""
@@ -81,20 +115,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "CommonController.cs",
+              "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\CommonController.cs",
+              "RelativeDocumentMoniker": "LMS\\Controllers\\CommonController.cs",
+              "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\CommonController.cs",
+              "RelativeToolTip": "LMS\\Controllers\\CommonController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIIAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-06T23:39:24.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "AdministratorController.cs",
               "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\AdministratorController.cs",
               "RelativeDocumentMoniker": "LMS\\Controllers\\AdministratorController.cs",
               "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Controllers\\AdministratorController.cs",
               "RelativeToolTip": "LMS\\Controllers\\AdministratorController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAIwDoAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD4AAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-06T23:23:56.764Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Professor.cs",
               "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Models\\LMSModels\\Professor.cs",
               "RelativeDocumentMoniker": "LMS\\Models\\LMSModels\\Professor.cs",
@@ -107,20 +154,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Program.cs",
-              "RelativeDocumentMoniker": "LMS\\Program.cs",
-              "ToolTip": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Program.cs",
-              "RelativeToolTip": "LMS\\Program.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwB4AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-06T23:17:58.357Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 8,
               "Title": "Register.cshtml.cs",
               "DocumentMoniker": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeDocumentMoniker": "LMS\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",

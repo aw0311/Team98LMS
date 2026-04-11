@@ -53,8 +53,25 @@ namespace LMS.Controllers
         /// </summary>
         /// <returns>The JSON array</returns>
         public IActionResult GetCatalog()
-        {            
-            return Json(null);
+        {
+            var departments = (from d in db.Departments
+                               select d).ToList();
+
+            var result = from d in departments
+                         select new
+                         {
+                             subject = d.Subject,
+                             dname = d.Name,
+                             courses = (from c in db.Courses
+                                        where c.Subject == d.Subject
+                                        select new 
+                                        { 
+                                            number = c.Number, 
+                                            cname = c.Name 
+                                        }).ToArray()
+                         };
+
+            return Json(result.ToArray());
         }
 
         /// <summary>
@@ -72,8 +89,24 @@ namespace LMS.Controllers
         /// <param name="number">The course number, as in 5530</param>
         /// <returns>The JSON array</returns>
         public IActionResult GetClassOfferings(string subject, int number)
-        {            
-            return Json(null);
+        {
+            var query = from c in db.Courses
+                        join cl in db.Classes on c.CourseId equals cl.CourseId
+                        join p in db.Professors on cl.ProfId equals p.UId
+                        where c.Subject == subject &&
+                        c.Number == number 
+                        select new
+                        {
+                            season = cl.Season,
+                            year = cl.Year,
+                            location = cl.Location,
+                            start = cl.StartTime,
+                            end = cl.EndTime,
+                            fname = p.FirstName,
+                            lname = p.LastName,
+
+                        };
+            return Json(query.ToArray());
         }
 
         /// <summary>
@@ -89,8 +122,16 @@ namespace LMS.Controllers
         /// <param name="asgname">The name of the assignment in the category</param>
         /// <returns>The assignment contents</returns>
         public IActionResult GetAssignmentContents(string subject, int num, string season, int year, string category, string asgname)
-        {            
-            return Content("");
+        {
+            var query = from c in db.Courses
+                        join cl in db.Classes on c.CourseId equals cl.CourseId
+                        join aCat in db.AssignmentCategories on cl.ClassId equals aCat.ClassId
+                        join a in db.Assignments on aCat.CategoryId equals a.CategoryId
+                        where a.Name == asgname
+                        select a.Contents;
+
+
+            return Content((string)query.FirstOrDefault());
         }
 
 
@@ -131,8 +172,59 @@ namespace LMS.Controllers
         /// or an object containing {success: false} if the user doesn't exist
         /// </returns>
         public IActionResult GetUser(string uid)
-        {           
-            return Json(new { success = false });
+        {
+
+            //check if user is a professor
+            if (db.Professors.Any(p => p.UId == uid))
+            {
+                var professor = from p in db.Professors
+                                where p.UId == uid
+                                select new
+                                {
+                                    fname = p.FirstName,
+                                    lname = p.LastName,
+                                    uid = p.UId,
+                                    department = p.WorksIn
+                                };
+                return Json(professor.FirstOrDefault());
+            }
+
+            // check if a user is a student
+            else if (db.Students.Any(s => s.UId == uid))
+            {
+                var student = from s in db.Students
+                              where s.UId == uid
+                              select new
+                              {
+                                  fname = s.FirstName,
+                                  lname = s.LastName,
+                                  uid = s.UId,
+                                  department = s.Major
+                              };
+                return Json(student.FirstOrDefault());
+            }
+
+
+            //check if user is an administrator
+            else if (db.Administrators.Any(a => a.UId == uid))
+            {
+                var admin = from a in db.Administrators
+                            where a.UId == uid
+                            select new
+                            {
+                                fname = a.FirstName,
+                                lname = a.LastName,
+                                uid = a.UId
+                            };
+                return Json(admin.FirstOrDefault());
+            }
+
+            //user is not a professor, student, or administrator
+            else
+            {
+                return Json(new { success = false });
+            }
+                
         }
 
 

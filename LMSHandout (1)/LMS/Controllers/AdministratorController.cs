@@ -1,11 +1,12 @@
-﻿using System;
+﻿using LMS.Models.LMSModels;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
-using LMS.Models.LMSModels;
-using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 [assembly: InternalsVisibleTo( "LMSControllerTests" )]
@@ -75,8 +76,14 @@ namespace LMS.Controllers
         /// <returns>The JSON result</returns>
         public IActionResult GetCourses(string subject)
         {
-            
-            return Json(null);
+            var query = from c in db.Courses
+                        where c.Subject == subject
+                        select new
+                        {
+                            number = c.Number,
+                            name = c.Name,
+                        };
+            return Json(query.ToArray());
         }
 
         /// <summary>
@@ -90,8 +97,15 @@ namespace LMS.Controllers
         /// <returns>The JSON result</returns>
         public IActionResult GetProfessors(string subject)
         {
-            
-            return Json(null);
+            var query = from p in db.Professors
+                        where p.WorksIn == subject
+                        select new
+                        {
+                            lname = p.LastName,
+                            fname = p.FirstName,
+                            uid = p.UId
+                        };
+            return Json(query.ToArray());
             
         }
 
@@ -107,8 +121,22 @@ namespace LMS.Controllers
         /// <returns>A JSON object containing {success = true/false}.
         /// false if the course already exists, true otherwise.</returns>
         public IActionResult CreateCourse(string subject, int number, string name)
-        {           
-            return Json(new { success = false });
+        {
+            if (db.Courses.Any(c => c.Subject == subject && c.Number == number))
+            {
+                return Json(new { success = false });
+            }
+
+            else
+            {
+                Course newCourse = new Course();
+                newCourse.Subject = subject;
+                newCourse.Name = name;
+                newCourse.Number = number;
+                db.Courses.Add(newCourse);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
         }
 
 
@@ -130,8 +158,44 @@ namespace LMS.Controllers
         /// a Class offering of the same Course in the same Semester,
         /// true otherwise.</returns>
         public IActionResult CreateClass(string subject, int number, string season, int year, DateTime start, DateTime end, string location, string instructor)
-        {            
-            return Json(new { success = false});
+        {
+            var courseID = (from c in db.Courses
+                           where c.Subject == subject && c.Number == number
+                           select c.CourseId).FirstOrDefault();
+            // Check if the course even exists
+            if (courseID == 0)
+            {
+                return Json(new { success = false });
+            }
+            
+            // Check if there is already an offering
+            if (db.Classes.Any(cl => cl.CourseId == courseID && cl.Season == season && cl.Year == year))
+            {
+                return Json(new { success = false });
+            }
+
+            // Check if locations overlap
+            if (db.Classes.Any(cl => cl.Location == location && cl.Season == season && cl.Year == year && 
+                                TimeOnly.FromDateTime(start) <= cl.EndTime && TimeOnly.FromDateTime(end) >= cl.StartTime))
+            {
+                return Json(new { success = false });
+            }
+
+            else
+            {
+                Class newClass = new Class();
+                newClass.Year = (uint)year;
+                newClass.Season = season;
+                newClass.Location = location;
+                newClass.StartTime = TimeOnly.FromDateTime(start);
+                newClass.EndTime = TimeOnly.FromDateTime(end);
+                newClass.ProfId = instructor;
+                newClass.CourseId = courseID;
+                db.Classes.Add(newClass);
+                db.SaveChanges();
+                return Json(new { success = true });
+            }
+
         }
 
 
