@@ -127,11 +127,12 @@ namespace LMS.Controllers
                         join cl in db.Classes on c.CourseId equals cl.CourseId
                         join aCat in db.AssignmentCategories on cl.ClassId equals aCat.ClassId
                         join a in db.Assignments on aCat.CategoryId equals a.CategoryId
-                        where a.Name == asgname
+                        where a.Name == asgname && c.Subject == subject && c.Number == num
+                        && cl.Season == season && cl.Year == year && aCat.Name == category
                         select a.Contents;
 
 
-            return Content((string)query.FirstOrDefault());
+            return Content(query.FirstOrDefault().ToString());
         }
 
 
@@ -150,8 +151,23 @@ namespace LMS.Controllers
         /// <param name="uid">The uid of the student who submitted it</param>
         /// <returns>The submission text</returns>
         public IActionResult GetSubmissionText(string subject, int num, string season, int year, string category, string asgname, string uid)
-        {            
-            return Content("");
+        {
+            var contents = (from c in db.Courses
+                        join cl in db.Classes on c.CourseId equals cl.CourseId
+                        join aCat in db.AssignmentCategories on cl.ClassId equals aCat.ClassId
+                        join a in db.Assignments on aCat.CategoryId equals a.CategoryId
+                        join s in db.Submissions on a.AssignmentId equals s.AssignmentId
+                        where a.Name == asgname && c.Subject == subject && c.Number == num
+                        && cl.Season == season && cl.Year == year && aCat.Name == category
+                        && s.StudentId == uid
+                        select s.Contents).FirstOrDefault();
+
+            if (contents == null)
+            {
+                return Content("");
+            }
+
+            return Content(contents);
         }
 
 

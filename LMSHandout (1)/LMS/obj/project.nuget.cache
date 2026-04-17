@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yCpzX2QFftk=",
+  "dgSpecHash": "1N+048NydQw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj",
+  "projectFilePath": "C:\\Users\\adamw\\OneDrive\\Desktop\\testLMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adamw\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\adamw\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

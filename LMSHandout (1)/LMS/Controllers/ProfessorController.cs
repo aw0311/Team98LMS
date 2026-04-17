@@ -120,7 +120,21 @@ namespace LMS_CustomIdentity.Controllers
         /// <returns>The JSON array</returns>
         public IActionResult GetStudentsInClass(string subject, int num, string season, int year)
         {
-            return Json(null);
+            var query = from c in db.Courses
+                        join cl in db.Classes on c.CourseId equals cl.CourseId
+                        join e in db.Enrolleds on cl.ClassId equals e.ClassId
+                        join s in db.Students on e.UId equals s.UId
+                        where c.Subject == subject && c.Number == num && cl.Season == season && cl.Year == year
+                        select new
+                        {
+                            fname = s.FirstName,
+                            lname = s.LastName,
+                            uid = s.UId,
+                            dob = s.Dob,
+                            grade = e.Grade
+                        };
+            
+            return Json(query.ToArray());
         }
 
 
@@ -262,14 +276,14 @@ namespace LMS_CustomIdentity.Controllers
         /// <returns>A JSON object containing success = true/false</returns>
         public IActionResult CreateAssignment(string subject, int num, string season, int year, string category, string asgname, int asgpoints, DateTime asgdue, string asgcontents)
         {
-            var categoryId = from cl in db.Classes
+            var categoryId = (from cl in db.Classes
                           join c in db.Courses on cl.CourseId equals c.CourseId
                           join aCat in db.AssignmentCategories on cl.ClassId equals aCat.ClassId
                           where cl.Season == season && cl.Year == year &&
                           c.Subject == subject && c.Number == num && aCat.Name == category
-                          select aCat.CategoryId;
+                          select aCat.CategoryId).FirstOrDefault();
 
-            if (db.Assignments.Any(a => a.Name == category && a.CategoryId == categoryId.FirstOrDefault()))
+            if (db.Assignments.Any(a => a.Name == asgname && a.CategoryId == categoryId))
             {
                 return Json(new { success = false });
             }
@@ -279,12 +293,32 @@ namespace LMS_CustomIdentity.Controllers
             assignment.Points = (uint)asgpoints;
             assignment.Due = asgdue;
             assignment.Contents = asgcontents;
-            assignment.CategoryId = categoryId.FirstOrDefault();
+            assignment.CategoryId = categoryId;
             db.Assignments.Add(assignment);
             db.SaveChanges();
 
+            var classId = (from cl in db.Classes
+                           join c in db.Courses on cl.CourseId equals c.CourseId
+                           where cl.Season == season && cl.Year == year &&
+                           c.Subject == subject && c.Number == num
+                           select cl.ClassId).FirstOrDefault();
+
+            var categories = (from aCat in db.AssignmentCategories
+                              where aCat.ClassId == classId
+                              select aCat).ToList();
+
+            var students = (from e in db.Enrolleds
+                            where e.ClassId == classId
+                            select e.UId).ToList();
+
+            foreach (var student in students)
+            {
+                CalculateStudentGrade(classId, categories, student);
+            }
+
             return Json(new { success = true });
         }
+
 
 
         /// <summary>
@@ -306,7 +340,24 @@ namespace LMS_CustomIdentity.Controllers
         /// <returns>The JSON array</returns>
         public IActionResult GetSubmissionsToAssignment(string subject, int num, string season, int year, string category, string asgname)
         {
-            return Json(null);
+            var query = from a in db.Assignments
+                        join aCat in db.AssignmentCategories on a.CategoryId equals aCat.CategoryId
+                        join cl in db.Classes on aCat.ClassId equals cl.ClassId
+                        join c in db.Courses on cl.CourseId equals c.CourseId
+                        join sub in db.Submissions on a.AssignmentId equals sub.AssignmentId
+                        join s in db.Students on sub.StudentId equals s.UId
+                        where c.Subject == subject && c.Number == num &&
+                        cl.Season == season && cl.Year == year && a.Name == asgname && aCat.Name == category
+                        select new
+                        {
+                            fname = s.FirstName,
+                            lname = s.LastName,
+                            uid = s.UId,
+                            time = sub.Time,
+                            score = sub.Score
+                        };
+
+            return Json(query.ToArray());
         }
 
 
@@ -324,7 +375,33 @@ namespace LMS_CustomIdentity.Controllers
         /// <returns>A JSON object containing success = true/false</returns>
         public IActionResult GradeSubmission(string subject, int num, string season, int year, string category, string asgname, string uid, int score)
         {
-            return Json(new { success = false });
+            var submission = from a in db.Assignments
+                        join aCat in db.AssignmentCategories on a.CategoryId equals aCat.CategoryId
+                        join cl in db.Classes on aCat.ClassId equals cl.ClassId
+                        join c in db.Courses on cl.CourseId equals c.CourseId
+                        join sub in db.Submissions on a.AssignmentId equals sub.AssignmentId
+                        join s in db.Students on sub.StudentId equals s.UId
+                        where c.Subject == subject && c.Number == num &&
+                        cl.Season == season && cl.Year == year && a.Name == asgname &&
+                        aCat.Name == category && sub.StudentId == uid
+                        select sub;
+
+            submission.FirstOrDefault().Score = (uint)score;
+            db.SaveChanges();
+
+            var classId = (from cl in db.Classes
+                           join c in db.Courses on cl.CourseId equals c.CourseId
+                           where cl.Season == season && cl.Year == year &&
+                           c.Subject == subject && c.Number == num
+                           select cl.ClassId).FirstOrDefault();
+
+            var categories = (from aCat in db.AssignmentCategories
+                              where aCat.ClassId == classId
+                              select aCat).ToList();
+
+            CalculateStudentGrade(classId, categories, uid);
+
+            return Json(new { success = true });
         }
 
 
@@ -358,7 +435,128 @@ namespace LMS_CustomIdentity.Controllers
         }
 
 
-        
+        /// <summary>
+        /// Helper method to calculate and update student grades when an assignment is graded. 
+        /// This is a helper method that is called when the professor updates
+        /// a students grade on an assignment. It updates only one student's grade, not the grades 
+        /// for all students enrolled in the course. 
+        /// <param name="subject">The course subject abbreviation</param>
+        /// <param name="num">The course number</param>
+        /// <param name="season">The season part of the semester for the class the assignment belongs to</param>
+        /// <param name="year">The year part of the semester for the class the assignment belongs to</param>
+        /// <param name="uid">The student's uid</param>
+        ///</summary>
+        ///<returns> A JSON object containing success = true/false</returns>
+        public IActionResult CalculateStudentGrade(uint classId, List<AssignmentCategory> categories, string uid)
+        {
+
+            double totalWeightedScore = 0;
+            double totalWeight = 0;
+
+            foreach (var aCat in categories)
+            {
+                var assignments = (from a in db.Assignments
+                                   where a.CategoryId == aCat.CategoryId
+                                   select a).ToList();
+
+                // Skip empty categories
+                if (assignments.Count == 0)
+                    continue;
+
+                double earned = 0;
+                double possible = 0;
+
+                foreach (var a in assignments)
+                {
+                    var sub = db.Submissions
+                                .FirstOrDefault(s => s.AssignmentId == a.AssignmentId && s.StudentId == uid);
+
+                    double score = sub != null ? sub.Score : 0;
+
+                    earned += score;
+                    possible += a.Points;
+                }
+
+                if (possible == 0)
+                    continue;
+
+                double percent = earned / possible;
+
+                totalWeightedScore += percent * aCat.Weight;
+                totalWeight += aCat.Weight;
+            }
+
+            // If no valid categories exist
+            string finalGrade = "--";
+
+            if (totalWeight > 0)
+            {
+                double finalPercent = (totalWeightedScore / totalWeight) * 100.0;
+                finalGrade = LetterGradeCalculator(finalPercent);
+            }
+
+            var enrolled = (from e in db.Enrolleds
+                           where e.UId == uid && e.ClassId == classId
+                           select e).FirstOrDefault();
+
+            if (enrolled != null)
+            {
+                enrolled.Grade = finalGrade;
+                db.SaveChanges();
+            }
+
+            return Json(new { success = false });
+        }
+
+        ///<summary> Helper  method  that calculates a letter grade based on
+        /// double  grade values. Refactored to simplify the CalculatesStudentGrade method
+        ///<param name="grade">The numeric grade.</param>
+        ///<returns>The a string letter grade.</returns>
+        ///</summary>
+
+        private static string LetterGradeCalculator(double grade) 
+        {
+            string letterGrade;
+            if (grade >= 93.0)
+                letterGrade = "A";
+
+            else if (grade >= 90.0)
+                letterGrade = "A-";
+
+            else if (grade >= 87.0)
+                letterGrade = "B+";
+
+            else if (grade >= 83.0)
+                letterGrade = "B";
+
+            else if (grade >= 80.0)
+                letterGrade = "B-";
+
+            else if (grade >= 77.0)
+                letterGrade = "C+";
+
+            else if (grade >= 73.0)
+                letterGrade = "C";
+
+            else if (grade >= 70.0)
+                letterGrade = "C-";
+
+            else if (grade >= 67.0)
+                letterGrade = "D+";
+
+            else if (grade >= 63.0)
+                letterGrade = "D";
+
+            else if (grade >= 60.0)
+                letterGrade = "D-";
+
+            else
+                letterGrade = "E";
+
+            return letterGrade;
+        }
+
+
         /*******End code to modify********/
     }
 }

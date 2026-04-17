@@ -162,19 +162,26 @@ namespace LMS.Controllers
                                aCat.Name == category && a.Name == asgname
                                select a.AssignmentId;
 
-            if (db.Submissions.Any(s => s.AssignmentId == assignmentId.FirstOrDefault() && s.StudentId == uid))
+            var existingSubmission = (from sub in db.Submissions
+                                     where sub.AssignmentId == assignmentId.FirstOrDefault() && sub.StudentId == uid
+                                     select sub).FirstOrDefault();
+
+            if (existingSubmission != null)
             {
-                var query = from s in db.Submissions where s.AssignmentId == assignmentId.FirstOrDefault() && s.StudentId == uid select s;
-                db.Submissions.Remove(query.FirstOrDefault());
+                existingSubmission.Time = DateTime.Now;
+                existingSubmission.Contents = contents;
             }
 
-            Submission submission = new Submission();
-            submission.Time = DateTime.Now;
-            submission.Score = 0;
-            submission.AssignmentId = assignmentId.FirstOrDefault();
-            submission.StudentId = uid;
-            submission.Contents = contents;
-            db.Submissions.Add(submission);
+            else
+            {
+                Submission submission = new Submission();
+                submission.Time = DateTime.Now;
+                submission.Score = 0;
+                submission.AssignmentId = assignmentId.FirstOrDefault();
+                submission.StudentId = uid;
+                submission.Contents = contents;
+                db.Submissions.Add(submission);
+            }
             db.SaveChanges();
             return Json(new { success = true });
         }
@@ -227,8 +234,41 @@ namespace LMS.Controllers
         /// <param name="uid">The uid of the student</param>
         /// <returns>A JSON object containing a single field called "gpa" with the number value</returns>
         public IActionResult GetGPA(string uid)
-        {            
-            return Json(null);
+        {
+            var grades = from e in db.Enrolleds
+                        where e.UId == uid
+                        select e.Grade;
+
+            double totalGradeVal = 0;
+            foreach(var grade in grades)
+            {
+                totalGradeVal += ConvertToNumber(grade);
+            }
+
+            double GPA = totalGradeVal / grades.Count();
+
+            return Json(new { gpa = GPA });
+        }
+
+        /// <summary>
+        /// Converts the given letter grade to it's numerical value.
+        /// </summary>
+        /// <param name="grade">The letter grade.</param>
+        /// <returns>The numerical value of the letter grade.</returns>
+        private static double ConvertToNumber(string grade)
+        {
+            if (grade == "A") return 4.0;
+            else if (grade == "A-") return 3.7;
+            else if (grade == "B+") return 3.3;
+            else if (grade == "B") return 3.0;
+            else if (grade == "B-") return 2.7;
+            else if (grade == "C+") return 2.3;
+            else if (grade == "C") return 2.0;
+            else if (grade == "C-") return 1.7;
+            else if (grade == "D+") return 1.3;
+            else if (grade == "D") return 1.0;
+            else if (grade == "D-") return 0.7;
+            else { return 0.0; }
         }
                 
         /*******End code to modify********/

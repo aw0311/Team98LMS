@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj": {}
+    "C:\\Users\\adamw\\OneDrive\\Desktop\\testLMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj": {}
   },
   "projects": {
-    "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj": {
+    "C:\\Users\\adamw\\OneDrive\\Desktop\\testLMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj",
+        "projectUniqueName": "C:\\Users\\adamw\\OneDrive\\Desktop\\testLMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj",
         "projectName": "LMS",
-        "projectPath": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj",
+        "projectPath": "C:\\Users\\adamw\\OneDrive\\Desktop\\testLMS\\Team98LMS\\LMSHandout (1)\\LMS\\LMS.csproj",
         "packagesPath": "C:\\Users\\adamw\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\adamw\\OneDrive\\Desktop\\LMS\\Team98LMS\\LMSHandout (1)\\LMS\\obj\\",
+        "outputPath": "C:\\Users\\adamw\\OneDrive\\Desktop\\testLMS\\Team98LMS\\LMSHandout (1)\\LMS\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
